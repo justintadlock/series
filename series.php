@@ -102,8 +102,8 @@ final class Series_Plugin {
 	public function includes() {
 
 		require_once( "{$this->directory_path}inc/taxonomies.php"                );
+		require_once( "{$this->directory_path}inc/template.php"                  );
 		require_once( "{$this->directory_path}inc/shortcodes.php"                );
-		require_once( "{$this->directory_path}inc/template-tags.php"             );
 		require_once( "{$this->directory_path}inc/class-widget-list-posts.php"   );
 		require_once( "{$this->directory_path}inc/class-widget-list-related.php" );
 	}
