@@ -1,216 +1,109 @@
 <?php
 /**
- * Series Template Tags
- *
- * Several functions (template tags) exist within this file, which can be used 
- * within the theme.  These are pretty standard things we generally see used
- * with categories and tags.
- *
- * WordPress already has numerous built-in functions that handle most of the work 
- * required here.  As opposed to rewriting a ton of code, we should make use of those 
- * pre-coded functions as much as possible.  Reference the WordPress files 
- * /wp-inclues/taxonomy.php and /wp-includes/category-template.php when looking 
- * for things you can do.
- *
- * Get a term by the term slug:
- * $term = get_term_by( 'slug', $term_slug, 'series' );
- *
- * Get a term's description:
- * $description = term_description( $term_id, 'series' );
- *
- * Get the series terms for a post:
- * $terms = get_the_term_list( $post->ID, 'series', $before, $sep, $after );
- *
- * Display the series terms for a post:
- * the_terms( $post->ID, 'series', $before, $sep, $after )
- *
- * Get all series terms:
- * $terms = get_terms( 'series', $args );
- *
- * Get a specific series term:
- * $term = get_term( $series, 'series', $output, $filter );
- *
- * Get a specific series term link:
- * $link = get_term_link( $series, 'series' );
- *
- * @package Series
+ * @package    Series
+ * @since      0.1.0
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2009 - 2013, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/plugins
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 /**
- * Produces a feed link for an individual series.
- *
- * @since 0.1
+ * @since      0.1.0
+ * @deprecated 0.2.0
  */
 function get_series_feed_link( $cat_id, $feed = '' ) {
-	$cat_id = (int) $cat_id;
-
-	$category = get_series( $cat_id );
-
-	if ( empty( $category ) || is_wp_error( $category ) )
-		return false;
-
-	if ( empty( $feed ) )
-		$feed = get_default_feed();
-
-	$permalink_structure = get_option( 'permalink_structure' );
-
-	if ( '' == $permalink_structure ) {
-		$link = trailingslashit( get_option( 'home' ) ) . "?feed=$feed&amp;series=" . $cat_id;
-	} else {
-		$link = get_series_link( $cat_id );
-		if( $feed == get_default_feed() )
-			$feed_link = 'feed';
-		else
-			$feed_link = "feed/$feed";
-
-		$link = trailingslashit( $link ) . user_trailingslashit( $feed_link, 'feed' );
-	}
-
-	$link = apply_filters( 'series_feed_link', $link, $feed );
-
-	return $link;
+	return get_term_feed_link( $term_id, 'series', $feed );
 }
 
 /**
- * Checks if the current page is a series archive.  This function
- * will return true|false depending on whether the value is true.
- * If a $slug is entered, we'll check against that.  Otherwise, we 
- * only check if the current page is a series.
- *
- * @since 0.1
+ * @since      0.1.0
+ * @deprecated 0.2.0
  */
 function is_series( $slug = false ) {
-	global $wp_query;
-
-	$tax = $wp_query->get_queried_object();
-	$taxonomy = get_query_var( 'taxonomy' );
-
-	if ( $slug && $slug == $tax->slug )
-		return true;
-	elseif ( $slug && $slug !== $tax->slug )
-		return false;
-
-	if ( $taxonomy == 'series' )
-		return true;
-
-	return false;
+	return is_tax( 'series', $slug );
 }
 
 /**
- * Check if the current post is within any of the given series.
- *
- * The given series are checked against the post's series' term_ids, names and slugs.
- * Series given as integers will only be checked against the post's series' term_ids.
- *
- * @uses is_object_in_term()
- *
- * @since 0.1
- * @param int|string|array $series. Series ID, name or slug, or array of said.
- * @param int|post object Optional.  Post to check instead of the current post.
- * @return bool True if the current post is in any of the given series.
+ * @since      0.1.0
+ * @deprecated 0.2.0
  */
 function in_series( $series, $_post = null ) {
-	if ( empty( $series ) )
-		return false;
-
-	if ( $_post )
-		$_post = get_post( $_post );
-	else
-		$_post =& $GLOBALS['post'];
-
-	if ( !$_post )
-		return false;
-
-	$r = is_object_in_term( $_post->ID, 'series', $series );
-
-	if ( is_wp_error( $r ) )
-		return false;
-
-	return $r;
+	return has_term( $series, 'series', $_post );
 }
 
 /**
  * Displays a list of posts by series ID.
- * $args['series'] must be input for the list to work.
  *
- * @uses get_posts() Grabs an array of posts to loop through.
- *
- * @since 0.1
- * @param array $args
- * @return string $out
+ * @since  0.1.0
+ * @param  array   $args
+ * @return string
  */
 function series_list_posts( $args = array() ) {
-	global $post;
+
+	if ( empty( $args['series'] ) )
+		return;
+
+	$out     = '';
+	$post_id = 0;
+
+	if ( in_the_loop() )
+		$post_id = get_the_ID();
+
+	else if ( is_singular() )
+		$post_id = get_queried_object_id();
 
 	$defaults = array(
-		'series' => '',		// Series args
-		'link_current' => false,
-		'order' => 'DESC',		// get_posts() args
-		'orderby' => 'ID',
-		'post_type' => 'post',
-		'exclude' => '',
-		'include' => '',
-		'numberposts' => -1,
-		'echo' => true,
+		'series'         => '', // term slug
+		'order'          => 'DESC',
+		'orderby'        => 'ID',
+		'posts_per_page' => -1,
+		'echo'           => false
 	);
 
-	$args = apply_filters( 'series_list_posts_args', $args );
-
 	$args = wp_parse_args( $args, $defaults );
-	extract( $args );
 
-	if ( !$series ) :
-		echo '<li>' . _e('No series term was input.', 'series') . '</li>';
-		return false;
-	endif;
+	$loop = new WP_Query( $args );
 
-	$series_posts = get_posts( $args );
+	if ( $loop->have_posts() ) {
 
-	if ( !$series_posts ) :
-		echo '<li>' . _e('No posts in this series.', 'series') . '</li>';
-		return false;
-	endif;
+		$out .= '<ul class="series-list">';
 
-	foreach ( $series_posts as $serial ) :
+		while ( $loop->have_posts() ) {
 
-		if ( $serial->ID == $post->ID && !$link_current )
-			$out .= '<li class="current-post">' . $serial->post_title . '</li>';
+			$loop->the_post();
 
-		else
-			$out .= '<li><a href="' . get_permalink( $serial->ID ) . '" title="' . wp_specialchars( $serial->post_title, 1 ) . '">' . $serial->post_title . '</a></li>';
+			$out .= $post_id === get_the_ID() ? the_title( '<li>', '</li>', false ) : the_title( '<li><a href="' . get_permalink() . '">', '</a></li>', false );
+		}
 
-	endforeach;
+		$out .= '</ul>';
+	}
 
-	if ( $echo )
-		echo $out;
-	else
+	wp_reset_postdata();
+
+	if ( false === $args['echo'] )
 		return $out;
+
+	echo $out;
 }
 
 /**
  * Displays a list of posts related to the post by the first series.
- * @uses series_list_posts() Lists the posts in the series.
  *
- * @since 0.1
- * @param array $args See series_list_posts() for arguments.
+ * @since  0.1.0
+ * @param  array  $args
  * @return string
  */
-function series_list_related( $args = array() ) {
-	global $post;
+function series_list_related() {
 
-	$series = get_the_terms( $post->ID, 'series' );
+	$series = get_the_terms( get_the_ID(), 'series' );
 
-	if ( !$series )
-		return '';
-	else
-		$series = reset( $series );
+	if ( empty( $series ) )
+		return;
 
-	$args['series'] = $series->slug;
+	$series = reset( $series );
 
-	if ( $args['echo'] )
-		echo series_list_posts( $args );
-	else
-		return series_list_posts( $args );
+	series_list_posts( array( 'series' => $series->slug ) );
 }
 
 ?>
