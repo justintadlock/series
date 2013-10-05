@@ -3,7 +3,7 @@
  * Plugin Name: Series
  * Plugin URI: http://themehybrid.com/plugins/series
  * Description: Creates a new taxonomy called "Series" that allows you to tie posts together in a series.
- * Version: 0.2.0-alpha-1
+ * Version: 0.2.0
  * Author: Justin Tadlock
  * Author URI: http://justintadlock.com
  *
