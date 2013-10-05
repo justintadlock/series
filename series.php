@@ -168,20 +168,4 @@ final class Series_Plugin {
 
 Series_Plugin::get_instance();
 
-/* === DEPRECATED === */
-
-/**
- * @since      0.1.0
- * @deprecated 0.2.0
- */
-function create_series_taxonomy() {
-}
-
-/**
- * @since      0.1.0
- * @deprecated 0.2.0
- */
-function series_register_widgets() {
-}
-
 ?>

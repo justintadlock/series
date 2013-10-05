@@ -9,30 +9,6 @@
  */
 
 /**
- * @since      0.1.0
- * @deprecated 0.2.0
- */
-function get_series_feed_link( $cat_id, $feed = '' ) {
-	return get_term_feed_link( $term_id, 'series', $feed );
-}
-
-/**
- * @since      0.1.0
- * @deprecated 0.2.0
- */
-function is_series( $slug = false ) {
-	return is_tax( 'series', $slug );
-}
-
-/**
- * @since      0.1.0
- * @deprecated 0.2.0
- */
-function in_series( $series, $_post = null ) {
-	return has_term( $series, 'series', $_post );
-}
-
-/**
  * Displays a list of posts by series ID.
  *
  * @since  0.1.0
@@ -116,5 +92,51 @@ function series_list_related( $args = array() ) {
 
 	return series_list_posts( $args );
 }
+
+/* === DEPRECATED === */
+
+/**
+ * @since      0.1.0
+ * @deprecated 0.2.0
+ */
+function get_series_feed_link( $cat_id, $feed = '' ) {
+	_deprecated_function( __FUNCTION__, '0.2.0', 'get_term_feed_link' );
+	return get_term_feed_link( $term_id, 'series', $feed );
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 0.2.0
+ */
+function is_series( $slug = false ) {
+	_deprecated_function( __FUNCTION__, '0.2.0', 'is_tax' );
+	return is_tax( 'series', $slug );
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 0.2.0
+ */
+function in_series( $series, $_post = null ) {
+	_deprecated_function( __FUNCTION__, '0.2.0', 'has_term' );
+	return has_term( $series, 'series', $_post );
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 0.2.0
+ */
+function create_series_taxonomy() {
+	_deprecated_function( __FUNCTION__, '0.2.0', '' );
+}
+
+/**
+ * @since      0.1.0
+ * @deprecated 0.2.0
+ */
+function series_register_widgets() {
+	_deprecated_function( __FUNCTION__, '0.2.0', '' );
+}
+
 
 ?>
