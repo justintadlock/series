@@ -73,9 +73,6 @@ final class Series_Plugin {
 		/* Load the functions files. */
 		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
 
-		/* Load the admin files. */
-		add_action( 'plugins_loaded', array( $this, 'admin' ), 4 );
-
 		/* Register widgets. */
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
@@ -91,7 +88,6 @@ final class Series_Plugin {
 	 * @return void
 	 */
 	public function setup() {
-
 		$this->directory_path = trailingslashit( plugin_dir_path( __FILE__ ) );
 		$this->directory_uri  = trailingslashit( plugin_dir_url(  __FILE__ ) );
 	}
@@ -123,16 +119,6 @@ final class Series_Plugin {
 
 		/* Load the translation of the plugin. */
 		load_plugin_textdomain( 'series', false, 'series/languages' );
-	}
-
-	/**
-	 * Loads the admin functions and files.
-	 *
-	 * @since  0.2.0
-	 * @access public
-	 * @return void
-	 */
-	public function admin() {
 	}
 
 	/**
