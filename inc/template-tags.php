@@ -94,7 +94,7 @@ function series_list_posts( $args = array() ) {
  * @param  array  $args
  * @return string
  */
-function series_list_related() {
+function series_list_related( $args = array() ) {
 
 	$post_id = 0;
 
@@ -112,7 +112,9 @@ function series_list_related() {
 
 	$series = reset( $series );
 
-	series_list_posts( array( 'series' => $series->slug ) );
+	$args['series'] = $series->slug;
+
+	return series_list_posts( $args );
 }
 
 ?>

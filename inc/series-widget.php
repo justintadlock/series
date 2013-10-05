@@ -1,110 +1,186 @@
 <?php
 /**
- * Series Widget
- *
- * @package Series
+ * @package    Series
+ * @since      0.2.0
+ * @author     Justin Tadlock <justin@justintadlock.com>
+ * @copyright  Copyright (c) 2009 - 2013, Justin Tadlock
+ * @link       http://themehybrid.com/plugins/plugins
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-/**
- * Output of the series widget.
- * @since 0.1
- */
-class Series_Widget_Series extends WP_Widget {
+class Series_Widget_List_Posts extends WP_Widget {
 
-	function Series_Widget_Series() {
-		$widget_ops = array( 'classname' => 'series', 'description' => __('A widget for outputting a list of posts by series.', 'series') );
-		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => 'series-list' );
-		$this->WP_Widget( 'series-list', __('Series: List Posts', 'series'), $widget_ops, $control_ops );
-	}
+	/**
+	 * Set up the widget's unique name, ID, class, description, and other options.
+	 *
+	 * @since  0.2.0
+	 * @access public
+	 * @return void
+	 */
+	public function __construct() {
 
-	function widget( $args, $instance ) {
-		extract( $args );
-
-		$title = apply_filters('widget_title', $instance['title'] );
-		$series = $instance['series'];
-		$order = $instance['order'];
-		$orderby = $instance['orderby'];
-		$numberposts = $instance['numberposts'];
-
-		$defaults = array(
-			'series' => $series,		// Series args
-			'link_current' => true,
-			'order' => $order,		// get_posts() args
-			'orderby' => $orderby,
-			'numberposts' => $numberposts,
-			'include' => '',
-			'exclude' => '',
-			'post_type' => 'post',
-			'echo' => true,
+		/* Set up the widget options. */
+		$widget_options = array(
+			'classname'   => 'series-list-posts',
+			'description' => esc_html__( 'Displays a list of posts within a series.', 'series' )
 		);
 
+		/* Set up the widget control options. */
+		$control_options = array(
+			'width'  => 200,
+			'height' => 350
+		);
+
+		/* Create the widget. */
+		$this->WP_Widget(
+			'series-list-posts',                  // $this->id_base
+			__( 'Series: List Posts', 'series' ), // $this->name
+			$widget_options,                      // $this->widget_options
+			$control_options                      // $this->control_options
+		);
+	}
+
+	/**
+	 * Outputs the widget based on the arguments input through the widget controls.
+	 *
+	 * @since  0.2.0
+	 * @access public
+	 * @return void
+	 */
+	public function widget( $sidebar, $instance ) {
+		extract( $sidebar );
+
+		/* Set up the arguments. */
+		$args = array(
+			'series'         => !empty( $instance['series'] )         ? $instance['series']         : '',
+			'order'          => !empty( $instance['order'] )          ? $instance['order']          : 'ASC',
+			'orderby'        => !empty( $instance['orderby'] )        ? $instance['orderby']        : 'date',
+			'posts_per_page' => !empty( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : -1
+		);
+
+		/* Output the theme's widget wrapper. */
 		echo $before_widget;
 
-		if ( $title )
-			echo $before_title . $title . $after_title;
+		/* If a title was input by the user, display it. */
+		if ( !empty( $instance['title'] ) )
+			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
-		echo '<ul>';
-			series_list_posts( $defaults );
-		echo '</ul>';
+		/* Output the series. */
+		series_list_posts( $args );
 
+		/* Close the theme's widget wrapper. */
 		echo $after_widget;
 	}
 
+	/**
+	 * Updates the widget control options for the particular instance of the widget.
+	 *
+	 * @since  0.2.0
+	 * @access public
+	 * @param  array  $new_instance
+	 * @param  array  $old_instance
+	 * @return array
+	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-		$instance['title'] = strip_tags( stripslashes( $new_instance['title'] ) );
-		$instance['series'] = strip_tags( stripslashes( $new_instance['series'] ) );
-		$instance['order'] = strip_tags( stripslashes( $new_instance['order'] ) );
-		$instance['orderby'] = strip_tags( stripslashes( $new_instance['orderby'] ) );
-		$instance['numberposts'] = strip_tags( stripslashes( $new_instance['numberposts'] ) );
+
+		$instance['title']          = strip_tags( $new_instance['title'] );
+		$instance['series']         = strip_tags( $new_instance['series'] );
+		$instance['order']          = strip_tags( $new_instance['order'] );
+		$instance['orderby']        = strip_tags( $new_instance['orderby'] );
+		$instance['posts_per_page'] = intval( $new_instance['posts_per_page'] );
 
 		return $instance;
 	}
 
+	/**
+	 * Displays the widget control options in the Widgets admin screen.
+	 *
+	 * @since  0.2.0
+	 * @access public
+	 * @return void
+	 */
 	function form( $instance ) {
 
-		//Defaults
-		$defaults = array( 'series' => '', 'title' => __('Series', 'series'), 'numberposts' => 10, 'orderby' => 'title' );
-		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
+		/* Get series. */
+		$terms = get_terms( 'series' );
+
+		/* If there are no terms, return. */
+		if ( empty( $terms ) ) {
+			_e( 'You need at least one series of posts to use this widget.', 'series' );
+			return;
+		}
+
+		/* Get a default series. */
+		$default_series = reset( $terms );
+
+		/* Set up the default form values. */
+		$defaults = array(
+			'title'          => __( 'Series', 'series' ),
+			'series'         => $default_series->slug,
+			'order'          => 'ASC',
+			'orderby'        => 'date',
+			'posts_per_page' => -1,
+		);
+
+		/* Merge the user-selected arguments with the defaults. */
+		$instance = wp_parse_args( (array) $instance, $defaults );
+
+		/* Orderby options. */
+		$orderby = array(
+			'ID'            => __( 'ID', 'series' ),
+			'author'        => __( 'Author', 'series' ),
+			'none'          => __( 'None', 'series' ),
+			'title'         => __( 'Title', 'series' ),
+			'name'          => __( 'Slug', 'series' ),
+			'date'          => __( 'Date', 'series' ),
+			'modified'      => __( 'Date Modified', 'series' ),
+			'random'        => __( 'Random', 'series' ),
+			'comment_count' => __( 'Comment Count', 'series' )
+		);
+
+		/* Order options. */
+		$order = array(
+			'ASC'  => __( 'Ascending', 'series' ),
+			'DESC' => __( 'Descending', 'series' )
+		);
+
+		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'series'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'series' ); ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
 		</p>
+
 		<p>
-			<label for="<?php echo $this->get_field_id( 'series' ); ?>"><?php _e('Series:', 'series'); ?></label>
-			<select id="<?php echo $this->get_field_id( 'series' ); ?>" name="<?php echo $this->get_field_name( 'series' ); ?>" class="widefat" style="width:100%;">
-			<?php $all_series = get_terms( 'series', '' ); ?>
-			<?php foreach ( $all_series as $series ) : ?>
-				<option <?php if ( $series->slug == $instance['series'] ) echo 'selected="selected"'; ?> value="<?php echo $series->slug; ?>"><?php echo $series->name; ?></option>
-			<?php endforeach; ?>
+			<label for="<?php echo $this->get_field_id( 'series' ); ?>"><?php _e( 'Series:', 'series' ); ?></label>
+			<select id="<?php echo $this->get_field_id( 'series' ); ?>" name="<?php echo $this->get_field_name( 'series' ); ?>" class="widefat" >
+				<?php foreach ( $terms as $term ) { ?>
+					<option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $instance['series'], $term->slug ); ?>><?php echo esc_html( $term->name ); ?></option>
+				<?php } ?>
 			</select>
 		</p>
+
 		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php _e('Order:', 'series'); ?> <code>order</code></label> 
-			<select id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>" class="widefat" style="width:100%;">
-				<option <?php if ( 'ASC' == $instance['order'] ) echo 'selected="selected"'; ?>>ASC</option>
-				<option <?php if ( 'DESC' == $instance['order'] ) echo 'selected="selected"'; ?>>DESC</option>
+			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><?php _e( 'Order By:', 'series' ); ?></label> 
+			<select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
+				<?php foreach ( $orderby as $option_value => $option_label ) { ?>
+					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
+				<?php } ?>
 			</select>
 		</p>
+
 		<p>
-			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><?php _e('Order By:', 'series'); ?> <code>orderby</code></label> 
-			<select id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>" class="widefat" style="width:100%;">
-				<option <?php if ( 'name' == $instance['orderby'] ) echo 'selected="selected"'; ?>>name</option>
-				<option <?php if ( 'ID' == $instance['orderby'] ) echo 'selected="selected"'; ?>>ID</option>
-				<option <?php if ( 'author' == $instance['orderby'] ) echo 'selected="selected"'; ?>>author</option>
-				<option <?php if ( 'category' == $instance['orderby'] ) echo 'selected="selected"'; ?>>category</option>
-				<option <?php if ( 'content' == $instance['orderby'] ) echo 'selected="selected"'; ?>>content</option>
-				<option <?php if ( 'date' == $instance['orderby'] ) echo 'selected="selected"'; ?>>date</option>
-				<option <?php if ( 'modified' == $instance['orderby'] ) echo 'selected="selected"'; ?>>modified</option>
-				<option <?php if ( 'password' == $instance['orderby'] ) echo 'selected="selected"'; ?>>password</option>
-				<option <?php if ( 'rand' == $instance['orderby'] ) echo 'selected="selected"'; ?>>rand</option>
-				<option <?php if ( 'title' == $instance['orderby'] ) echo 'selected="selected"'; ?>>title</option>
+			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php _e( 'Order:', 'series' ); ?></label> 
+			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
+				<?php foreach ( $order as $option_value => $option_label ) { ?>
+					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
+				<?php } ?>
 			</select>
 		</p>
+
 		<p>
-			<label for="<?php echo $this->get_field_id( 'numberposts' ); ?>"><?php _e('Number:', 'series'); ?> <code>numberposts</code></label>
-			<input id="<?php echo $this->get_field_id( 'numberposts' ); ?>" name="<?php echo $this->get_field_name( 'numberposts' ); ?>" value="<?php echo $instance['numberposts']; ?>" style="width:100%;" />
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'series' ); ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo $instance['posts_per_page']; ?>" />
 		</p>
 		<div style="clear:both;">&nbsp;</div>
 	<?php

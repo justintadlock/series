@@ -143,8 +143,8 @@ final class Series_Plugin {
 	 * @return void
 	 */
 	public function register_widgets() {
-		register_widget( 'Series_Widget_Series'  );
-		register_widget( 'Series_Widget_Related' );
+		register_widget( 'Series_Widget_List_Posts'   );
+		register_widget( 'Series_Widget_List_Related' );
 	}
 
 	/**
