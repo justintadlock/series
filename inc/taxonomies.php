@@ -13,6 +13,13 @@
 /* Register taxonomies on the 'init' hook. */
 add_action( 'init', 'series_plugin_register_taxonomies' );
 
+/**
+ * Registers custom taxonomies for this plugin.
+ *
+ * @since  0.1.0
+ * @access public
+ * @return void
+ */
 function series_plugin_register_taxonomies() {
 
 	/* Set up the arguments for the series taxonomy. */

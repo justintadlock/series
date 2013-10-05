@@ -1,5 +1,7 @@
 <?php
 /**
+ * Registers custom shortcodes for the plugin.
+ *
  * @package    Series
  * @since      0.1.0
  * @author     Justin Tadlock <justin@justintadlock.com>

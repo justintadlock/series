@@ -1,5 +1,7 @@
 <?php
 /**
+ * List Related Posts Widget - Lists posts within the current post's series. 
+ *
  * @package    Series
  * @since      0.2.0
  * @author     Justin Tadlock <justin@justintadlock.com>

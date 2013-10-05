@@ -1,5 +1,7 @@
 <?php
 /**
+ * Functions for use in theme templates.
+ *
  * @package    Series
  * @since      0.2.0
  * @author     Justin Tadlock <justin@justintadlock.com>

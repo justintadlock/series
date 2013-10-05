@@ -1,5 +1,7 @@
 <?php
 /**
+ * List Posts Widget - Lists posts from a given series.
+ *
  * @package    Series
  * @since      0.2.0
  * @author     Justin Tadlock <justin@justintadlock.com>
