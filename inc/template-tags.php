@@ -58,7 +58,7 @@ function series_list_posts( $args = array() ) {
 		'order'          => 'DESC',
 		'orderby'        => 'ID',
 		'posts_per_page' => -1,
-		'echo'           => false
+		'echo'           => true
 	);
 
 	$args = wp_parse_args( $args, $defaults );
