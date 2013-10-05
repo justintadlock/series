@@ -64,7 +64,7 @@ class Series_Widget_Series extends WP_Widget {
 	function form( $instance ) {
 
 		//Defaults
-		$defaults = array( 'title' => __('Series', 'series'), 'numberposts' => 10, 'orderby' => 'title' );
+		$defaults = array( 'series' => '', 'title' => __('Series', 'series'), 'numberposts' => 10, 'orderby' => 'title' );
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<p>
