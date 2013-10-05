@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>A guide to the Series plugin</title>
+
+<link rel="stylesheet" href="readme.css" type="text/css" media="screen" />
+
+</head>
+<body>
+
+<h1>A guide to Series</h1>
+
+<p><em>Series</em> is a plugin that creates a custom taxonomy called "series" for your blog.  The purpose of this plugin is to allow you to easily link posts that are written as part of a series. </p>
+
+<p>While the plugin is still in its early stages, I hope to continue building on top of the current code base to make this one of the most powerful series plugins available.  I'm always open to new ideas on what could make the plugin better.  If you have an idea, don't hesitate in <a href="http://justintadlock.com/contact" title="Contact Justin Tadlock">contacting me</a> with your proposal.</p>
+
+<p><strong>Note 1:</strong> <em>This plugin is for WordPress 2.8+ only.  It won't work on older versions.</em></p>
+
+<p><strong>Note 2:</strong> <em>The term "series" is both singular and plural.  Yep, it can be confusing, so just pay attention to the context of the sentences within this guide.</em></p>
+
+<h2>How to install the plugin</h2>
+
+<ol>
+	<li>Uzip the <code>series.zip</code> folder.</li>
+	<li>Upload the <code>series</code> folder to your <code>/wp-content/plugins</code> directory.</li>
+	<li>In your WordPress dashboard, head over to the <em>Plugins</em> section.</li>
+	<li>Activate <em>Series</em>.</li>
+</ol>
+
+<h2>Using the plugin</h2>
+
+<p>There are actually several ways you can use this plugin or WordPress taxonomies in general.  I'll walk you through some different scenarios to allow you to see some different uses.</p>
+
+<p>Before getting into anything, you'll want to create some new series.  You can do this in one of two ways:</p>
+
+<ol>
+	<li>Click on the <em>Series</em> menu item (sub-menu item of <em>Posts</em>) and create a new series from here.</li>
+	<li>Write a new post and look for the meta box labeled <em>Series</em>.</li>
+</ol>
+
+<p>Once you've written added one or more series to a few posts, you'll want to display them.  Since I have no clue how you want to do this, I'll try to make it easier by showing you some different methods in this guide.</p>
+
+<h2>Using the series widgets</h2>
+
+<p>I've packaged two separate widgets for you to use in displaying your series posts:</p>
+
+<ol>
+	<li><em>Series: List Posts</em> allows you to display a list of posts in any series of your choosing.</li>
+	<li><em>Series: Related Posts</em> shows posts in the same series as the current post (<em>only displayed on single post views</em>).</li>
+</ol>
+
+<p>Each widget is pretty neat and adds another layer to this plugin.  I've added several parameters to allow you to customize the output:</p>
+
+<ul>
+	<li>
+		<strong>Title</strong><br />
+		The title of the widget. Duh!
+	</li>
+	<li>
+		<strong>Series</strong><br />
+		Allows you to select the specific series you'd like to list posts from.  (<em>Not used with the Series: Related Posts widget</em>)
+	</li>
+	<li>
+		<strong>Order</strong><br />
+		Should your posts be in ascending or descending order? Use in conjunction with <em>Order By</em>.
+	</li>
+	<li>
+		<strong>Order By</strong><br />
+		What criteria should your posts be ordered by? Choose from several selections.
+	</li>
+	<li>
+		<strong>Number</strong><br />
+		How many posts should be displayed.  To display all posts, use <code>-1</code>.
+	</li>
+</ul>
+
+<h2>Shortcodes</h2>
+
+<p>Currently, there's only one shortcode packaged with this plugin, but I hope to add more after seeing what users demand.  Shortcodes can be used in the WordPress post editor (by default).</p>
+
+<p>The first (and only) shortcode is <code>[the-series]</code>, which lists the series of the currently displayed post.  You'd add it to your post editor like so:</p>
+
+<pre><code>[the-series]</code></pre>
+
+<p>It also accepts before, after, and separator parameters:</p>
+
+<pre><code>[the-series before="&lt;p>Series: " separator=", " after="&lt;/p>"]</code></pre>
+
+<h2>Listing a post's series</h2>
+
+<p>Most WordPress themes display a post's categories and tags, but they're not equipped to list your series.  If you'd like to add this functionality, try this out within The Loop:</p>
+
+<pre><code>&lt;?php echo get_the_term_list( $post->ID, 'series', 'Series: ', ', ', '' ); ?></code></pre>
+
+<h2>Showing your series in a term (tag) cloud</h2>
+
+<p>To show off all of your series terms you've created in a <em>tag</em> cloud, do this:</p>
+
+<pre><code>&lt;?php wp_tag_cloud( array( 'taxonomy' => 'series' ) ); ?></code></pre>
+
+<h2>Get a series description</h2>
+
+<p>When you create a new series, you can add a series description for each individual series.  To display this in your theme, use this code:</p>
+
+<pre><code>&lt;?php echo term_description( $term_id, 'series' ); ?></code></pre>
+
+<h2>Series templates</h2>
+
+<p>When you create a new series, WordPress will automatically add a new archive to your site.  It'll typically look something like <code>http://yoursite.com/series/series-name</code>.  But, what the heck is displayed on this page?  More than likely, it'll be something cooked up by your theme's <code>archive.php</code> template, which may make things kind of ugly if your theme doesn't support custom taxonomies in WordPress.</p>
+
+<p>Never fear!  I've included two templates for you to play around with.  The first is for the WordPress Default theme and the second is for the <a href="http://themehybrid.com/themes/hybrid" title="Hybrid WordPress theme framework">Hybrid theme</a>.  You can find these templates in the <code>default</code> and <code>hybrid</code> folders packaged with the plugin.</p>
+
+<p>To use one of these templates, just drop the template off in your theme's (or child theme's) directory.  If you don't use one of those two themes, feel free to integrate the code into your current theme.</p>
+
+<p>The template (for both) is named <code>taxonomy-series.php</code>.  It's pretty important that you not change this.  WordPress recognizes this as a legitimate template file and will only use it if it has that particular name.</p>
+
+<h2>More stuff</h2>
+
+<p>There's loads of things you can do with the series taxonomy, much more than I could possibly ever cover in this guide.  I'll add more instructions as time passes on and I see what users need help with.</p>
+
+<p>For now, please take some time to read through these two posts.  They'll help you see why custom taxonomies are important and how the series plugin might be useful.</p>
+
+<ul>
+	<li><a href="http://justintadlock.com/archives/2009/05/06/custom-taxonomies-in-wordpress-28" title="Custom taxonomies in WordPress 2.8">Custom taxonomies in WordPress 2.8</a></li>
+	<li><a href="http://justintadlock.com/archives/2009/06/04/using-custom-taxonomies-to-create-a-movie-database" title="Using custom taxonomies to create a movie database">Using custom taxonomies to create a movie database</a></li>
+</ul>
+
+<h2>Plugin support</h2>
+
+<p>I run a WordPress community called <a href="http://themehybrid.com" title="Theme Hybrid">Theme Hybrid</a>, which is where I fully support all of my WordPress projects, including plugins.  You can sign up for an account to get plugin support for a small yearly fee ($25 <acronym title="United States Dollars">USD</acronym> at the time of writing).</p>
+
+<p>I know.  I know.  You might not want to pay for support, but just consider it a donation to the project.  To continue making cool, <acronym title="GNU General Public License">GPL</acronym>-licensed plugins and having the time to support them, I must pay the bills.</p>
+
+<h2>Copyright &amp; license</h2>
+
+<p><em>Series</em> is licensed under the <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" title="GNU GPL">GNU General Public License</a>, version 2 (<acronym title="GNU General Public License">GPL</acronym>).</p>
+
+<p>This plugin is copyrighted to <a href="http://justintadlock.com" title="Justin Tadlock">Justin Tadlock</a>.</p>
+
+<p>2009 &copy; Justin Tadlock</p>
+
+</body>
+</html>
