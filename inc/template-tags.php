@@ -104,7 +104,8 @@ function series_list_related() {
 	else if ( is_singular() )
 		$post_id = get_queried_object_id();
 
-	$series = get_the_terms( $post_id, 'series' );
+	if ( !empty( $post_id ) )
+		$series = get_the_terms( $post_id, 'series' );
 
 	if ( empty( $series ) )
 		return;
