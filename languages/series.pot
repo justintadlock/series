@@ -2,78 +2,153 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Series WordPress Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-09 16:05+0900\n"
+"POT-Creation-Date: 2013-10-05 00:02-0600\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Justin Tadlock <justin@justintadlock.com>\n"
+"Last-Translator: \n"
 "Language-Team:  <justin@justintadlock.com>\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED STATES\n"
-"X-Poedit-KeywordsList: _e;__\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _e;__;esc_attr__;esc_attr_e;esc_html__;esc_html_e;_x;"
+"_x:1,2c;_n:1,2;_n\n"
+"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: series-related-widget.php:15
-msgid "A widget for showing other posts in the same series as the current post."
+#: inc/class-widget-list-posts.php:25
+msgid "Displays a list of posts within a series."
 msgstr ""
 
-#: series-related-widget.php:17
-msgid "Series: Related Posts"
-msgstr ""
-
-#: series-related-widget.php:74
-msgid "Articles in this series"
-msgstr ""
-
-#: series-related-widget.php:78
-#: series-widget.php:71
-msgid "Title:"
-msgstr ""
-
-#: series-related-widget.php:82
-#: series-widget.php:84
-msgid "Order:"
-msgstr ""
-
-#: series-related-widget.php:89
-#: series-widget.php:91
-msgid "Order By:"
-msgstr ""
-
-#: series-related-widget.php:104
-#: series-widget.php:106
-msgid "Number:"
-msgstr ""
-
-#: series-widget.php:15
-msgid "A widget for outputting a list of posts by series."
-msgstr ""
-
-#: series-widget.php:17
+#: inc/class-widget-list-posts.php:37
 msgid "Series: List Posts"
 msgstr ""
 
-#: series-widget.php:67
-#: series.php:83
-#: series.php:85
+#: inc/class-widget-list-posts.php:109
+msgid "You need at least one series of posts to use this widget."
+msgstr ""
+
+#: inc/class-widget-list-posts.php:118 inc/taxonomies.php:46
+#: inc/taxonomies.php:47 inc/taxonomies.php:48 inc/taxonomies.php:49
 msgid "Series"
 msgstr ""
 
-#: series-widget.php:75
+#: inc/class-widget-list-posts.php:130 inc/class-widget-list-related.php:123
+msgid "ID"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:131 inc/class-widget-list-related.php:124
+msgid "Author"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:132 inc/class-widget-list-related.php:125
+msgid "None"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:133 inc/class-widget-list-related.php:126
+msgid "Title"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:134 inc/class-widget-list-related.php:127
+msgid "Slug"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:135 inc/class-widget-list-related.php:128
+msgid "Date"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:136 inc/class-widget-list-related.php:129
+msgid "Date Modified"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:137 inc/class-widget-list-related.php:130
+msgid "Random"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:138 inc/class-widget-list-related.php:131
+msgid "Comment Count"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:143 inc/class-widget-list-related.php:136
+msgid "Ascending"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:144 inc/class-widget-list-related.php:137
+msgid "Descending"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:150 inc/class-widget-list-related.php:143
+msgid "Title:"
+msgstr ""
+
+#: inc/class-widget-list-posts.php:155
 msgid "Series:"
 msgstr ""
 
-#: template-tags.php:163
-msgid "No series term was input."
+#: inc/class-widget-list-posts.php:164 inc/class-widget-list-related.php:148
+msgid "Order By:"
 msgstr ""
 
-#: template-tags.php:170
-msgid "No posts in this series."
+#: inc/class-widget-list-posts.php:173 inc/class-widget-list-related.php:157
+msgid "Order:"
 msgstr ""
 
-#: hybrid/taxonomy-series.php:48
-msgid "Sorry, there are no posts in this archive."
+#: inc/class-widget-list-posts.php:182 inc/class-widget-list-related.php:166
+msgid "Limit:"
 msgstr ""
 
+#: inc/class-widget-list-related.php:25
+msgid "Displays a list of posts within the current post's series."
+msgstr ""
+
+#: inc/class-widget-list-related.php:37
+msgid "Series: List Related"
+msgstr ""
+
+#: inc/class-widget-list-related.php:112
+msgid "Articles in this series"
+msgstr ""
+
+#: inc/taxonomies.php:50
+msgid "Search Series"
+msgstr ""
+
+#: inc/taxonomies.php:51
+msgid "Popular Series"
+msgstr ""
+
+#: inc/taxonomies.php:52
+msgid "All Series"
+msgstr ""
+
+#: inc/taxonomies.php:53
+msgid "Edit Series"
+msgstr ""
+
+#: inc/taxonomies.php:54
+msgid "View Series"
+msgstr ""
+
+#: inc/taxonomies.php:55
+msgid "Update Series"
+msgstr ""
+
+#: inc/taxonomies.php:56
+msgid "Add New Series"
+msgstr ""
+
+#: inc/taxonomies.php:57
+msgid "New Series Name"
+msgstr ""
+
+#: inc/taxonomies.php:58
+msgid "Separate series with commas"
+msgstr ""
+
+#: inc/taxonomies.php:59
+msgid "Add or remove series"
+msgstr ""
+
+#: inc/taxonomies.php:60
+msgid "Choose from the most used series"
+msgstr ""
