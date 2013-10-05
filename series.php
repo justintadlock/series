@@ -77,7 +77,7 @@ final class Series_Plugin {
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 		/* Register activation hook. */
-		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
+		register_activation_hook( __FILE__, array( $this, 'activation' ) );
 	}
 
 	/**
@@ -140,7 +140,7 @@ final class Series_Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public static function activation() {
+	public function activation() {
 
 		/* Get the administrator role. */
 		$role = get_role( 'administrator' );
