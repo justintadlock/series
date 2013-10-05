@@ -96,7 +96,15 @@ function series_list_posts( $args = array() ) {
  */
 function series_list_related() {
 
-	$series = get_the_terms( get_the_ID(), 'series' );
+	$post_id = 0;
+
+	if ( in_the_loop() )
+		$post_id = get_the_ID();
+
+	else if ( is_singular() )
+		$post_id = get_queried_object_id();
+
+	$series = get_the_terms( $post_id, 'series' );
 
 	if ( empty( $series ) )
 		return;
