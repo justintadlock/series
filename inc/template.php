@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    Series
- * @since      0.1.0
+ * @since      0.2.0
  * @author     Justin Tadlock <justin@justintadlock.com>
  * @copyright  Copyright (c) 2009 - 2013, Justin Tadlock
  * @link       http://themehybrid.com/plugins/plugins
@@ -31,8 +31,8 @@ function series_list_posts( $args = array() ) {
 
 	$defaults = array(
 		'series'         => '', // term slug
-		'order'          => 'DESC',
-		'orderby'        => 'ID',
+		'order'          => 'ASC',
+		'orderby'        => 'date',
 		'posts_per_page' => -1,
 		'echo'           => true
 	);
