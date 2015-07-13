@@ -139,6 +139,3 @@ function create_series_taxonomy() {
 function series_register_widgets() {
 	_deprecated_function( __FUNCTION__, '0.2.0', '' );
 }
-
-
-?>

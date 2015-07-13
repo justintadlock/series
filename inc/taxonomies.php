@@ -71,5 +71,3 @@ function series_plugin_register_taxonomies() {
 	/* Register the 'series' taxonomy. */
 	register_taxonomy( 'series', array( 'post' ), $args );
 }
-
-?>

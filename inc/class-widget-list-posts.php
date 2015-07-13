@@ -188,5 +188,3 @@ class Series_Widget_List_Posts extends WP_Widget {
 	<?php
 	}
 }
-
-?>

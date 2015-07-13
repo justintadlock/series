@@ -167,5 +167,3 @@ final class Series_Plugin {
 }
 
 Series_Plugin::get_instance();
-
-?>

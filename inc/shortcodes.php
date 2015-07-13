@@ -34,17 +34,15 @@ function series_plugin_register_shortcodes() {
  */
 function the_series_shortcode( $attr ) {
 
-	$attr = shortcode_atts( 
-		array( 
-			'before'    => '', 
-			'after'     => '', 
+	$attr = shortcode_atts(
+		array(
+			'before'    => '',
+			'after'     => '',
 			'separator' => ','
-		), 
-		$attr, 
+		),
+		$attr,
 		'the-series'
 	);
 
 	return get_the_term_list( get_the_ID(), 'series', $attr['before'], $attr['separator'], $attr['after'] );
 }
-
-?>
