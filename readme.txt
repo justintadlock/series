@@ -4,8 +4,7 @@ Contributors: greenshady
 Donate link: http://themehybrid.com/donate
 Tags: widget, taxonomy, shortcode, posts, series
 Requires at least: 3.6
-Tested up to: 3.7
-Stable tag: 0.2.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +16,7 @@ Series is a plugin created to allow users to easily link posts together by using
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 40,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ### Plugin Development
 
@@ -106,10 +105,4 @@ If upgrading from a version earlier than 0.2.0, be sure to check your widgets.  
 
 == Changelog ==
 
-### Version 0.2.0
-
-* Completely overhauled the entire code base.
-
-### Version 0.1
-
-* Plugin launch.
+Please see the `changelog.md` file included with the plugin.  Or, you can view the [online change log](https://github.com/justintadlock/series/blob/master/changelog.md).
