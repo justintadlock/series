@@ -34,7 +34,7 @@ class Series_Widget_List_Related extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'series-list-related',                  // $this->id_base
 			__( 'Series: List Related', 'series' ), // $this->name
 			$widget_options,                        // $this->widget_options

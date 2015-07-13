@@ -34,7 +34,7 @@ class Series_Widget_List_Posts extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'series-list-posts',                  // $this->id_base
 			__( 'Series: List Posts', 'series' ), // $this->name
 			$widget_options,                      // $this->widget_options
@@ -163,7 +163,7 @@ class Series_Widget_List_Posts extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><?php _e( 'Order By:', 'series' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><?php _e( 'Order By:', 'series' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
 				<?php foreach ( $orderby as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -172,7 +172,7 @@ class Series_Widget_List_Posts extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php _e( 'Order:', 'series' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php _e( 'Order:', 'series' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
 				<?php foreach ( $order as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
