@@ -1,23 +1,15 @@
+#Series
+
 Adds a new taxonomy called "series" to your blog that allows you to link together several posts in a series.
 
 Series is a plugin created to allow users to easily link posts together by using a WordPress taxonomy (like tags or categories) called "series".  It can be particularly useful if you write several posts spanning the same topic and want them tied together in some way that tags or categories doesn't cover.
 
-## Changelog
-
-### Version 0.2.0
-
-* Completely overhauled the entire code base.
-
-### Version 0.1
-
-* Plugin launch.
-
 ## Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 40,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ## Copyright and License
 
 This project is licensed under the [GNU GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html), version 2 or later.
 
-2009&thinsp;&ndash;&thinsp;2013 &copy; [Justin Tadlock](http://justintadlock.com).
+2009&thinsp;&ndash;&thinsp;2015 &copy; [Justin Tadlock](http://justintadlock.com).
