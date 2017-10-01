@@ -119,6 +119,7 @@ final class Plugin {
 	 */
 	private function includes() {
 
+		require_once( $this->dir . 'inc/functions-options.php'    );
 		require_once( $this->dir . 'inc/functions-shortcodes.php' );
 		require_once( $this->dir . 'inc/functions-taxonomies.php' );
 		require_once( $this->dir . 'inc/functions-deprecated.php' );
