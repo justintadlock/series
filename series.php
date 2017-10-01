@@ -14,8 +14,8 @@
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * You should have received a copy of the GNU General Public License along with this program; if not, write
- * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * You should have received a copy of the GNU General Public License along with this program; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package   Series
  * @version   1.0.0
@@ -26,107 +26,143 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-final class Series_Plugin {
+namespace Series;
+
+/**
+ * Singleton class that sets up and initializes the plugin.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return void
+ */
+final class Plugin {
 
 	/**
-	 * Holds the instance of this class.
+	 * Plugin directory path.
 	 *
-	 * @since  0.2.0
-	 * @access private
-	 * @var    object
-	 */
-	private static $instance;
-
-	/**
-	 * Stores the directory path for this plugin.
-	 *
-	 * @since  0.2.0
-	 * @access private
+	 * @since  2.0.0
+	 * @access public
 	 * @var    string
 	 */
-	private $directory_path;
+	public $dir = '';
 
 	/**
-	 * Stores the directory URI for this plugin.
+	 * Plugin directory URI.
 	 *
-	 * @since  0.2.0
-	 * @access private
+	 * @since  2.0.0
+	 * @access public
 	 * @var    string
 	 */
-	private $directory_uri;
+	public $uri = '';
 
 	/**
-	 * Plugin setup.
+	 * Returns the instance.
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
+	 * @access public
+	 * @return object
+	 */
+	public static function get_instance() {
+
+		static $instance = null;
+
+		if ( is_null( $instance ) ) {
+			$instance = new self;
+			$instance->setup();
+			$instance->includes();
+			$instance->setup_actions();
+		}
+
+		return $instance;
+	}
+
+	/**
+	 * Constructor method.
+	 *
+	 * @since  2.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function __construct() {}
+
+	/**
+	 * Magic method to output a string if trying to use the object as a string.
+	 *
+	 * @since  2.0.0
 	 * @access public
 	 * @return void
 	 */
-	public function __construct() {
+	public function __toString() {
+		return 'series';
+	}
 
-		/* Set the properties needed by the plugin. */
-		add_action( 'plugins_loaded', array( $this, 'setup' ), 1 );
+	/**
+	 * Sets up globals.
+	 *
+	 * @since  2.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function setup() {
 
-		/* Internationalize the text strings used. */
+		// Main plugin directory path and URI.
+		$this->dir = trailingslashit( plugin_dir_path( __FILE__ ) );
+		$this->uri  = trailingslashit( plugin_dir_url(  __FILE__ ) );
+	}
+
+	/**
+	 * Loads files needed by the plugin.
+	 *
+	 * @since  2.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function includes() {
+
+		require_once( $this->dir . 'inc/functions-taxonomies.php' );
+		require_once( $this->dir . 'inc/functions-deprecated.php' );
+
+		require_once( "{$this->dir}inc/template.php"                  );
+		require_once( "{$this->dir}inc/shortcodes.php"                );
+		require_once( "{$this->dir}inc/class-widget-list-posts.php"   );
+		require_once( "{$this->dir}inc/class-widget-list-related.php" );
+	}
+
+	/**
+	 * Sets up main plugin actions and filters.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function setup_actions() {
+
+		// Internationalize the text strings used.
 		add_action( 'plugins_loaded', array( $this, 'i18n' ), 2 );
-
-		/* Load the functions files. */
-		add_action( 'plugins_loaded', array( $this, 'includes' ), 3 );
 
 		/* Register widgets. */
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
-		/* Register activation hook. */
+		// Register activation hook.
 		register_activation_hook( __FILE__, array( $this, 'activation' ) );
-	}
-
-	/**
-	 * Defines the directory path and URI for the plugin.
-	 *
-	 * @since  0.2.0
-	 * @access public
-	 * @return void
-	 */
-	public function setup() {
-		$this->directory_path = trailingslashit( plugin_dir_path( __FILE__ ) );
-		$this->directory_uri  = trailingslashit( plugin_dir_url(  __FILE__ ) );
-	}
-
-	/**
-	 * Loads the initial files needed by the plugin.
-	 *
-	 * @since  0.2.0
-	 * @access public
-	 * @return void
-	 */
-	public function includes() {
-
-		require_once( $this->directory_path . 'inc/functions-taxonomies.php' );
-		require_once( $this->directory_path . 'inc/functions-deprecated.php' );
-
-		require_once( "{$this->directory_path}inc/template.php"                  );
-		require_once( "{$this->directory_path}inc/shortcodes.php"                );
-		require_once( "{$this->directory_path}inc/class-widget-list-posts.php"   );
-		require_once( "{$this->directory_path}inc/class-widget-list-related.php" );
 	}
 
 	/**
 	 * Loads the translation files.
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @access public
 	 * @return void
 	 */
 	public function i18n() {
 
-		/* Load the translation of the plugin. */
-		load_plugin_textdomain( 'series', false, 'series/languages' );
+		load_plugin_textdomain( 'series', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'languages' );
 	}
 
 	/**
 	 * Loads the admin functions and files.
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -138,34 +174,35 @@ final class Series_Plugin {
 	/**
 	 * Method that runs only when the plugin is activated.
 	 *
-	 * @since  0.2.0
+	 * @since  2.0.0
 	 * @access public
 	 * @return void
 	 */
 	public function activation() {
 
-		/* Get the administrator role. */
+		// Get the administrator role.
 		$role = get_role( 'administrator' );
 
-		/* If the administrator role exists, add required capabilities for the plugin. */
-		if ( !empty( $role ) )
+		// If the administrator role exists, add required capabilities for the plugin.
+		if ( ! empty( $role ) ) {
+
 			$role->add_cap( 'manage_series' );
-	}
-
-	/**
-	 * Returns the instance.
-	 *
-	 * @since  0.2.0
-	 * @access public
-	 * @return object
-	 */
-	public static function get_instance() {
-
-		if ( !self::$instance )
-			self::$instance = new self;
-
-		return self::$instance;
+		}
 	}
 }
 
-Series_Plugin::get_instance();
+/**
+ * Gets the instance of the `Plugin` class.  This function is useful for quickly grabbing data
+ * used throughout the plugin.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return object
+ */
+function plugin() {
+
+	return Plugin::get_instance();
+}
+
+// Let's roll!
+plugin();

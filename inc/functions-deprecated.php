@@ -9,4 +9,6 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+class Series_Plugin {}
+
 function series_plugin_register_taxonomies() {}
