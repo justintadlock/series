@@ -119,6 +119,10 @@ final class Plugin {
 	 */
 	private function includes() {
 
+		// Load classes.
+		require_once( $this->dir . 'inc/class-widget-list-posts.php'   );
+		require_once( $this->dir . 'inc/class-widget-list-related.php' );
+
 		// Include functions files.
 		require_once( $this->dir . 'inc/functions-options.php'    );
 		require_once( $this->dir . 'inc/functions-rewrite.php'    );
@@ -128,9 +132,6 @@ final class Plugin {
 
 		// Include template files.
 		require_once( $this->dir . 'inc/template-general.php' );
-
-		require_once( "{$this->dir}inc/class-widget-list-posts.php"   );
-		require_once( "{$this->dir}inc/class-widget-list-related.php" );
 	}
 
 	/**
@@ -172,8 +173,9 @@ final class Plugin {
 	 * @return void
 	 */
 	public function register_widgets() {
-		register_widget( 'Series_Widget_List_Posts'   );
-		register_widget( 'Series_Widget_List_Related' );
+
+		register_widget( __NAMESPACE__ . '\Widgets\List_Posts'   );
+		register_widget( __NAMESPACE__ . '\Widgets\List_Related' );
 	}
 
 	/**
