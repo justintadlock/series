@@ -12,18 +12,6 @@
 namespace Series;
 
 /**
- * Returns an array of supported post types.
- *
- * @since  2.0.0
- * @access public
- * @return array
- */
-function get_supported_post_types() {
-
-	return apply_filters( 'series/get_supported_post_types', get_setting( 'post_types' ) );
-}
-
-/**
  * Returns the number of posts per page for series archives.
  *
  * @since  2.0.0
@@ -99,7 +87,6 @@ function get_default_settings() {
 	return array(
 		// @since 2.0.0
 		'series_rewrite_base' => 'series',
-		'post_types'          => array( 'post' ),
 		'posts_per_page'      => 10,
 		'posts_orderby'       => 'date',
 		'posts_order'         => 'DESC'

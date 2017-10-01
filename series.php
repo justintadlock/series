@@ -120,6 +120,7 @@ final class Plugin {
 	private function includes() {
 
 		// Include functions files.
+		require_once( $this->dir . 'inc/functions-filters.php'    );
 		require_once( $this->dir . 'inc/functions-options.php'    );
 		require_once( $this->dir . 'inc/functions-rewrite.php'    );
 		require_once( $this->dir . 'inc/functions-shortcodes.php' );

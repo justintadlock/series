@@ -115,7 +115,11 @@ function register_taxonomies() {
 	);
 
 	// Register the taxonomies.
-	register_taxonomy( get_series_taxonomy(), 'post', apply_filters( 'series/series_taxonomy_args', $series_args ) );
+	register_taxonomy(
+		get_series_taxonomy(),
+		array( 'post' ),
+		apply_filters( 'series/series_taxonomy_args', $series_args )
+	);
 }
 
 /**

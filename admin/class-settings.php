@@ -78,14 +78,10 @@ final class Settings_Page {
 
 		/* === Settings Sections === */
 
-		add_settings_section( 'general',     esc_html__( 'General',    'series' ), array( $this, 'section_general'    ), $this->settings_page );
 		add_settings_section( 'reading',     esc_html__( 'Reading',    'series' ), array( $this, 'section_reading'    ), $this->settings_page );
 		add_settings_section( 'permalinks',  esc_html__( 'Permalinks', 'series' ), array( $this, 'section_permalinks' ), $this->settings_page );
 
 		/* === Settings Fields === */
-
-		// General section fields.
-		add_settings_field( 'post_types', esc_html__( 'Post Types', 'series' ), array( $this, 'field_post_types' ), $this->settings_page, 'general' );
 
 		// Reading section fields.
 		add_settings_field( 'posts_per_page', esc_html__( 'Posts Per Page',  'series' ), array( $this, 'field_posts_per_page' ), $this->settings_page, 'reading' );
@@ -109,9 +105,6 @@ final class Settings_Page {
 		// Text boxes.
 		$settings['series_rewrite_base'] = $settings['series_rewrite_base'] ? trim( strip_tags( $settings['series_rewrite_base'] ), '/' ) : '';
 
-		// Arrays.
-		$settings['post_types'] = is_array( $settings['post_types'] ) ? array_map( 'sanitize_key', $settings['post_types'] ) : array( 'post' );
-
 		// Numbers.
 		$posts_per_page = intval( $settings['posts_per_page'] );
 		$settings['posts_per_page'] = -2 < $posts_per_page ? $posts_per_page : 10;
@@ -125,49 +118,6 @@ final class Settings_Page {
 		// Return the validated/sanitized settings.
 		return $settings;
 	}
-
-	/**
-	 * General section callback.
-	 *
-	 * @since  2.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function section_general() { ?>
-
-		<p class="description">
-			<?php esc_html_e( 'General settings for the plugin.', 'series' ); ?>
-		</p>
-	<?php }
-
-	/**
-	 * Post types field callback.
-	 *
-	 * @since  2.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function field_post_types() {
-
-		$post_types = get_post_types( array( 'public' => true ), 'objects' ); ?>
-
-		<p class="description">
-			<?php esc_html_e( 'Select the post types that can be serialized.', 'series' ); ?>
-		</p>
-
-		<ul>
-		<?php foreach ( $post_types as $type ) : ?>
-
-			<li>
-				<label>
-					<input type="checkbox" name="series_settings[post_types][]" value="<?php echo esc_attr( $type->name ); ?>" <?php checked( in_array( $type->name, get_supported_post_types() ) ); ?> />
-					<?php echo esc_html( $type->labels->singular_name ); ?>
-				</label>
-			</li>
-
-		<?php endforeach; ?>
-		</ul>
-	<?php }
 
 	/**
 	 * Reading section callback.
