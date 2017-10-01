@@ -10,7 +10,7 @@ Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a new taxonomy called "series" to your blog that allows you to link together several posts in a series.
+Plugin that allows you to collect posts in a series.
 
 == Description ==
 
@@ -18,22 +18,17 @@ Series is a plugin created to allow users to easily link posts together by using
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](https://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](https://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 75,000+ users (and growing).
 
 ### Plugin Development
 
-If you're a theme author, plugin author, or just a code hobbyist, you can follow the development of this plugin on it's [GitHub repository](https://github.com/justintadlock/series). 
+If you're a theme author, plugin author, or just a code hobbyist, you can follow the development of this plugin on it's [GitHub repository](https://github.com/justintadlock/series).
 
 ### Donations
 
-Yes, I do accept donations.  If you want to buy me a beer or whatever, you can do so from my [donations page](https://themehybrid.com/donate).  I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
+Yes, I do accept donations.  If you want to donate, you can do so from my [donations page](https://themehybrid.com/donate) or grab me something from my [Amazon Wish List](http://a.co/flUb0ns).
 
-== Installation ==
-
-1. Unzip the `series.zip` folder.
-2. Upload the `series` folder to your `/wp-content/plugins` directory.
-3. In your WordPress dashboard, head over to the *Plugins* section.
-4. Activate *Series*.
+I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
 
 == Frequently Asked Questions ==
 
@@ -49,10 +44,14 @@ It creates a new taxonomy called "series" for use on your site.  It gives you te
 
 Basically, you get a new meta box on the edit post screen titled "Series" that works just like regular tags.  You can input a series name to add a post to a series.  You also get a "Series" screen under the "Posts" menu in the WordPress admin.
 
+### Why am I getting a 404 error on series pages?
+
+You just need to set up the plugin.  Go to Settings > Series in your WordPress admin and save the settings.  It'll let WordPress know about your series permalink, which is necessary for showing series on the front end of the site.
+
 ### What widgets are available to use?
 
-* **Series: List Posts** - This widget allows you to list posts from any series you've created.
-* **Series: List Related** - This widget displays posts within the current post's series.  So, it only shows up under two conditions: 1) you're viewing a single post and 2) the current post is within a series.
+* **Series - List Posts** - This widget allows you to list posts from any series you've created.
+* **Series - List Related** - This widget displays posts within the current post's series.  So, it only shows up under two conditions: 1) you're viewing a single post and 2) the current post is within a series.
 
 ### Are there other functions to use in my theme?
 
@@ -86,7 +85,7 @@ If you want a template for a specific series, name the template `taxonomy-series
 
 ### Can you add feature X?
 
-I'll consider it.  Let me know what features you'd like to see added to the plugin.  Just keep in mind that I want this plugin to stay relatively lightweight.  Any features added should be useful for most of the plugin's users.
+I'll consider it.  Let me know what features you'd like to see added to the plugin.
 
 ### This is way too complicated for me!
 
