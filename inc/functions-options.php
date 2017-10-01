@@ -12,6 +12,54 @@
 namespace Series;
 
 /**
+ * Returns an array of supported post types.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return array
+ */
+function get_supported_post_types() {
+
+	return apply_filters( 'series/get_supported_post_types', get_setting( 'post_types' ) );
+}
+
+/**
+ * Returns the number of posts per page for series archives.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return int
+ */
+function get_posts_per_page() {
+
+	return apply_filters( 'series/get_posts_per_page', get_setting( 'posts_per_page' ) );
+}
+
+/**
+ * Returns the posts orderby on series archives.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return string
+ */
+function get_posts_orderby() {
+
+	return apply_filters( 'series/get_posts_orderby', get_setting( 'posts_orderby' ) );
+}
+
+/**
+ * Returns the posts order on series archives.
+ *
+ * @since  2.0.0
+ * @access public
+ * @return string
+ */
+function get_posts_order() {
+
+	return apply_filters( 'series/get_posts_order', get_setting( 'posts_order' ) );
+}
+
+/**
  * Returns the series rewrite base. Used for series archives.
  *
  * @since  2.0.0
@@ -50,6 +98,10 @@ function get_default_settings() {
 
 	return array(
 		// @since 2.0.0
-		'series_rewrite_base' => 'series'
+		'series_rewrite_base' => 'series',
+		'post_types'          => array( 'post' ),
+		'posts_per_page'      => 10,
+		'posts_orderby'       => 'date',
+		'posts_order'         => 'DESC'
 	);
 }

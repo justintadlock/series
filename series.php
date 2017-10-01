@@ -132,6 +132,12 @@ final class Plugin {
 		// Load widget classes.
 		require_once( $this->dir . 'inc/widgets/class-list-posts.php'   );
 		require_once( $this->dir . 'inc/widgets/class-list-related.php' );
+
+		// Load admin files.
+		if ( is_admin() ) {
+
+			require_once( $this->dir . 'admin/class-settings.php' );
+		}
 	}
 
 	/**
