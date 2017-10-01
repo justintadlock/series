@@ -144,8 +144,8 @@ function list_posts( $args = array() ) {
 			$title = get_the_title() ? the_title( '', '', false ) : get_the_ID();
 
 			$out .= $post_id === get_the_ID()
-			        ? sprintf( '<li><a href="%s">%s</a></li>', $title, esc_url( get_permalink() ) )
-			        : sprintf( '<li>%s</li>', $title );
+			        ? sprintf( '<li>%s</li>', $title )
+			        : sprintf( '<li><a href="%s">%s</a></li>', esc_url( get_permalink() ), $title );
 		}
 
 		$out .= '</ul>';
