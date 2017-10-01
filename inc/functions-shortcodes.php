@@ -23,7 +23,58 @@ add_action( 'init', __NAMESPACE__ . '\register_shortcodes' );
  */
 function register_shortcodes() {
 
-	add_shortcode( 'the-series', __NAMESPACE__ . 'the_series_shortcode' );
+	add_shortcode( 'series_list_posts',   __NAMESPACE__ . '\list_posts_shortcode'   );
+	add_shortcode( 'series_list_related', __NAMESPACE__ . '\list_related_shortcode' );
+
+	// @deprecated 2.0.0
+	add_shortcode( 'the-series', __NAMESPACE__ . '\the_series_shortcode' );
+}
+
+/**
+ * List posts by series shortcode.
+ *
+ * @since  2.0.0
+ * @access public
+ * @param  array  $attr
+ * @return string
+ */
+function list_posts_shortcode( $attr = array() ) {
+
+	$defaults = array(
+		'series'         => '',
+		'order'          => 'ASC',
+		'orderby'        => 'date',
+		'posts_per_page' => -1,
+	);
+
+	$attr = shortcode_atts( $defaults , $attr, 'series_list_posts' );
+
+	$attr['echo'] = false;
+
+	return list_posts( $attr );
+}
+
+/**
+ * List posts in the same series as the current post.
+ *
+ * @since  2.0.0
+ * @access public
+ * @param  array  $attr
+ * @return string
+ */
+function list_related_shortcode( $attr = array() ) {
+
+	$defaults = array(
+		'order'          => 'ASC',
+		'orderby'        => 'date',
+		'posts_per_page' => -1,
+	);
+
+	$attr = shortcode_atts( $defaults , $attr, 'series_list_related' );
+
+	$attr['echo'] = false;
+
+	return list_related_posts( get_the_ID(), $attr );
 }
 
 /**
