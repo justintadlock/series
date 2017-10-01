@@ -107,7 +107,7 @@ function register_taxonomies() {
 
 		// The rewrite handles the URL structure.
 		'rewrite' => array(
-			'slug'         => 'series',//ccp_get_series_rewrite_slug(),
+			'slug'         => get_series_rewrite_slug(),
 			'with_front'   => false,
 			'hierarchical' => false,
 			'ep_mask'      => EP_NONE

@@ -20,7 +20,7 @@ namespace Series;
  */
 function get_series_rewrite_base() {
 
-	return apply_filters( 'get_series_rewrite_base', get_setting( 'series_rewrite_base' ) );
+	return apply_filters( 'series/get_series_rewrite_base', get_setting( 'series_rewrite_base' ) );
 }
 
 /**
