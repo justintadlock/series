@@ -119,11 +119,15 @@ final class Plugin {
 	 */
 	private function includes() {
 
+		// Include functions files.
 		require_once( $this->dir . 'inc/functions-options.php'    );
 		require_once( $this->dir . 'inc/functions-rewrite.php'    );
 		require_once( $this->dir . 'inc/functions-shortcodes.php' );
 		require_once( $this->dir . 'inc/functions-taxonomies.php' );
 		require_once( $this->dir . 'inc/functions-deprecated.php' );
+
+		// Include template files.
+		require_once( $this->dir . 'inc/template-general.php' );
 
 		require_once( "{$this->dir}inc/template.php"                  );
 		require_once( "{$this->dir}inc/class-widget-list-posts.php"   );
