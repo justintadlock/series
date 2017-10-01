@@ -12,3 +12,17 @@
 class Series_Plugin {}
 
 function series_plugin_register_taxonomies() {}
+function series_plugin_register_shortcodes() {}
+
+/**
+ * @since      0.1.0
+ * @deprecated 2.0.0
+ * @access     public
+ * @attr       $attr
+ * @return     string
+ */
+function the_series_shortcode( $attr ) {
+
+	return \Series\the_series_shortcode( $attr );
+}
+
