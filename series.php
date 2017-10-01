@@ -119,10 +119,6 @@ final class Plugin {
 	 */
 	private function includes() {
 
-		// Load classes.
-		require_once( $this->dir . 'inc/class-widget-list-posts.php'   );
-		require_once( $this->dir . 'inc/class-widget-list-related.php' );
-
 		// Include functions files.
 		require_once( $this->dir . 'inc/functions-options.php'    );
 		require_once( $this->dir . 'inc/functions-rewrite.php'    );
@@ -132,6 +128,10 @@ final class Plugin {
 
 		// Include template files.
 		require_once( $this->dir . 'inc/template-general.php' );
+
+		// Load widget classes.
+		require_once( $this->dir . 'inc/widgets/class-list-posts.php'   );
+		require_once( $this->dir . 'inc/widgets/class-list-related.php' );
 	}
 
 	/**
