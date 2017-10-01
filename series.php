@@ -3,7 +3,7 @@
  * Plugin Name: Series
  * Plugin URI:  https://themehybrid.com/plugins/series
  * Description: Plugin that allows you to collect posts in a series.
- * Version:     2.0.0-dev
+ * Version:     2.0.0
  * Author:      Justin Tadlock
  * Author URI:  https://themehybrid.com
  * Text Domain: series
