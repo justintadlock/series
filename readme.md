@@ -1,4 +1,4 @@
-#Series
+# Series
 
 Adds a new taxonomy called "series" to your blog that allows you to link together several posts in a series.
 
