@@ -297,8 +297,6 @@ final class Settings_Page {
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Series Settings', 'series' ); ?></h1>
 
-			<?php settings_errors(); ?>
-
 			<form method="post" action="options.php">
 				<?php settings_fields( 'series_settings' ); ?>
 				<?php do_settings_sections( $this->settings_page ); ?>
