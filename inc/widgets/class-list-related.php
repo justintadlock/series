@@ -135,20 +135,20 @@ class List_Related extends \WP_Widget {
 
 		// Orderby options.
 		$orderby = array(
-			'ID'            => __( 'ID', 'series' ),
-			'author'        => __( 'Author', 'series' ),
-			'none'          => __( 'None', 'series' ),
-			'title'         => __( 'Title', 'series' ),
-			'name'          => __( 'Slug', 'series' ),
-			'date'          => __( 'Date', 'series' ),
-			'modified'      => __( 'Date Modified', 'series' ),
-			'random'        => __( 'Random', 'series' ),
-			'comment_count' => __( 'Comment Count', 'series' )
+			'ID'            => __( 'ID',               'series' ),
+			'author'        => __( 'Author',           'series' ),
+			'none'          => __( 'None',             'series' ),
+			'title'         => __( 'Title',            'series' ),
+			'name'          => __( 'Slug',             'series' ),
+			'date'          => __( 'Date (Published)', 'series' ),
+			'modified'      => __( 'Date (Modified)',  'series' ),
+			'random'        => __( 'Random',           'series' ),
+			'comment_count' => __( 'Comment Count',    'series' )
 		);
 
 		// Order options.
 		$order = array(
-			'ASC'  => __( 'Ascending', 'series' ),
+			'ASC'  => __( 'Ascending',  'series' ),
 			'DESC' => __( 'Descending', 'series' )
 		); ?>
 
