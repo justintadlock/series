@@ -131,7 +131,7 @@ function list_posts( $args = array() ) {
 		)
 	);
 
-	$loop = new WP_Query( $query_args );
+	$loop = new \WP_Query( $query_args );
 
 	if ( $loop->have_posts() ) {
 
