@@ -129,7 +129,6 @@ final class Plugin {
 		// Include template files.
 		require_once( $this->dir . 'inc/template-general.php' );
 
-		require_once( "{$this->dir}inc/template.php"                  );
 		require_once( "{$this->dir}inc/class-widget-list-posts.php"   );
 		require_once( "{$this->dir}inc/class-widget-list-related.php" );
 	}

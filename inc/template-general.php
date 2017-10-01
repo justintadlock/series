@@ -86,3 +86,101 @@ function get_post_series( $args = array() ) {
 
 	return $html;
 }
+
+/**
+ * Displays a list of posts by series.
+ *
+ * @since  2.0.0
+ * @param  array   $args
+ * @return string
+ */
+function list_posts( $args = array() ) {
+
+	if ( empty( $args['series'] ) )
+		return;
+
+	$out     = '';
+	$post_id = 0;
+
+	if ( in_the_loop() )
+		$post_id = get_the_ID();
+
+	else if ( is_singular() )
+		$post_id = get_queried_object_id();
+
+	$defaults = array(
+		'series'         => '', // term slug
+		'order'          => 'ASC',
+		'orderby'        => 'date',
+		'posts_per_page' => -1,
+		'echo'           => true
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$query_args = array(
+		'order'          => $args['order'],
+		'orderby'        => $args['orderby'],
+		'posts_per_page' => $args['posts_per_page'],
+		'tax_query'      => array(
+			array(
+				'taxonomy' => get_series_taxonomy(),
+				'field'    => is_numeric( $args['series'] ) ? 'term_id' : 'slug',
+				'terms'    => array( $args['series'] )
+			)
+		)
+	);
+
+	$loop = new WP_Query( $query_args );
+
+	if ( $loop->have_posts() ) {
+
+		$out .= '<ul class="series-list">';
+
+		while ( $loop->have_posts() ) {
+
+			$loop->the_post();
+
+			$title = get_the_title() ? the_title( '', '', false ) : get_the_ID();
+
+			$out .= $post_id === get_the_ID()
+			        ? sprintf( '<li><a href="%s">%s</a></li>', $title, esc_url( get_permalink() ) )
+			        : sprintf( '<li>%s</li>', $title );
+		}
+
+		$out .= '</ul>';
+	}
+
+	wp_reset_postdata();
+
+	if ( false === $args['echo'] )
+		return $out;
+
+	echo $out;
+}
+
+/**
+ * Displays a list of posts related to the current post.
+ *
+ * @since  2.0.0
+ * @param  int     $post_id
+ * @param  array   $args
+ * @return string
+ */
+function list_related_posts( $post_id = 0, $args = array() ) {
+
+	if ( ! $post_id )
+		get_the_ID();
+
+	if ( $post_id )
+		$series = get_the_terms( $post_id, get_series_taxonomy() );
+
+	if ( empty( $series ) )
+		return;
+
+	$series = reset( $series );
+
+	$args['series'] = $series->slug;
+
+	return list_posts( $args );
+}
