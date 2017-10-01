@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Series
- * Plugin URI: http://themehybrid.com/plugins/series
- * Description: Creates a new taxonomy called "Series" that allows you to tie posts together in a series.
- * Version: 1.0.0
- * Author: Justin Tadlock
- * Author URI: http://justintadlock.com
+ * Plugin URI:  https://themehybrid.com/plugins/series
+ * Description: Plugin that allows you to collect posts in a series.
+ * Version:     2.0.0-dev
+ * Author:      Justin Tadlock
+ * Author URI:  https://themehybrid.com
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation; either version 2 of the License,
@@ -18,11 +18,9 @@
  * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package   Series
- * @version   1.0.0
- * @since     0.1.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2009 - 2015, Justin Tadlock
- * @link      http://themehybrid.com/plugins/series
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2009 - 2017, Justin Tadlock
+ * @link      https://themehybrid.com/plugins/series
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 

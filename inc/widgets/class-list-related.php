@@ -3,9 +3,9 @@
  * List Related Posts Widget - Lists posts within the current post's series.
  *
  * @package    Series
- * @author     Justin Tadlock <justin@justintadlock.com>
- * @copyright  Copyright (c) 2009 - 2015, Justin Tadlock
- * @link       http://themehybrid.com/plugins/plugins
+ * @author     Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2009 - 2017, Justin Tadlock
+ * @link       https://themehybrid.com/plugins/plugins
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 

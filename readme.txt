@@ -1,10 +1,12 @@
 === Series ===
 
 Contributors: greenshady
-Donate link: http://themehybrid.com/donate
-Tags: widget, taxonomy, shortcode, posts, series
-Requires at least: 3.6
-Stable tag: 1.0.0
+Donate link: https://themehybrid.com/donate
+Tags: series, widgets, shortcodes
+Requires at least: 4.8
+Tested up to: 4.8.2
+Requires PHP: 5.3
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +18,7 @@ Series is a plugin created to allow users to easily link posts together by using
 
 ### Professional Support
 
-If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](http://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
+If you need professional plugin support from me, the plugin author, you can access the support forums at [Theme Hybrid](https://themehybrid.com/support), which is a professional WordPress help/support site where I handle support for all my plugins and themes for a community of 60,000+ users (and growing).
 
 ### Plugin Development
 
@@ -24,7 +26,7 @@ If you're a theme author, plugin author, or just a code hobbyist, you can follow
 
 ### Donations
 
-Yes, I do accept donations.  If you want to buy me a beer or whatever, you can do so from my [donations page](http://themehybrid.com/donate).  I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
+Yes, I do accept donations.  If you want to buy me a beer or whatever, you can do so from my [donations page](https://themehybrid.com/donate).  I appreciate all donations, no matter the size.  Further development of this plugin is not contingent on donations, but they are always a nice incentive.
 
 == Installation ==
 
