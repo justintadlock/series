@@ -64,6 +64,9 @@ class List_Related extends \WP_Widget {
 	 */
 	public function widget( $sidebar, $instance ) {
 
+		if ( ! is_singular() )
+			return;
+
 		// Set the $args for wp_get_archives() to the $instance array.
 		$args = wp_parse_args( $instance, $this->defaults );
 
@@ -71,7 +74,7 @@ class List_Related extends \WP_Widget {
 		$args['echo'] = false;
 
 		// Get the series list.
-		$list = \Series\list_related_posts( is_singular() ? get_queried_object_id() : get_the_ID(), $args );
+		$list = \Series\list_related_posts( get_queried_object_id(), $args );
 
 		// Only display if we have a series.
 		if ( empty( $list ) )
