@@ -100,6 +100,7 @@ function register_taxonomies() {
 		'show_in_nav_menus' => true,
 		'show_tagcloud'     => true,
 		'show_admin_column' => true,
+		'show_in_rest'      => true,
 		'hierarchical'      => false,
 		'query_var'         => get_series_taxonomy(),
 		'capabilities'      => get_series_capabilities(),
