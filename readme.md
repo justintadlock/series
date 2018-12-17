@@ -12,4 +12,4 @@ If you need professional plugin support from me, the plugin author, you can acce
 
 This project is licensed under the [GNU GPL](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html), version 2 or later.
 
-2009 - 2017 &copy; [Justin Tadlock](http://justintadlock.com).
+2009 - 2018 &copy; [Justin Tadlock](http://justintadlock.com).
