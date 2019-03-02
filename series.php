@@ -90,7 +90,7 @@ final class Plugin {
 	 *
 	 * @since  2.0.0
 	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function __toString() {
 		return 'series';
