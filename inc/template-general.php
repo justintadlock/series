@@ -35,7 +35,7 @@ function is_series( $term = '' ) {
  */
 function in_series( $term, $post = null ) {
 
-	return apply_filters( 'series/in_series', has_term( $series, get_series_taxonomy(), $post ), $term, $post );
+	return apply_filters( 'series/in_series', has_term( $term, get_series_taxonomy(), $post ), $term, $post );
 }
 
 /**
