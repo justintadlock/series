@@ -109,7 +109,7 @@ class List_Posts extends \WP_Widget {
 		$orderby = array( 'ID', 'author', 'none', 'title', 'name', 'date', 'modified', 'random', 'comment_count' );
 
 		$instance['order']   = in_array( $new_instance['order'], $order )   ? $new_instance['order']  : 'ASC';
-		$instance['orderby'] = in_array( $new_instance['orderby'], $order )   ? $new_instance['orderby']  : 'date';
+		$instance['orderby'] = in_array( $new_instance['orderby'], $orderby )   ? $new_instance['orderby']  : 'date';
 
 		// Integers.
 		$instance['posts_per_page'] = intval( $new_instance['posts_per_page'] );
